@@ -5,12 +5,12 @@ jobs:
     steps:
       - checkout
       - run:
-        working_directory:  ~/project/backend
-        command: npm install
+          working_directory:  ~/project/backend
+          command: npm install
         
       - run:
-        working_directory:  ~/project/backen
-        command: npm test
+          working_directory:  ~/project/backen
+          command: npm test
 workflows:
   version: 2
   build_and_test:
