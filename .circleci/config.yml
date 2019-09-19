@@ -9,8 +9,15 @@ jobs:
           command: npm install
         
       - run:
-          working_directory:  ~/project/backen
-          command: npm test
+          working_directory:  ~/project/backend
+          command: npm run test
+      - run:
+          working_directory:  ~/project/frontend-react
+          command: npm install
+        
+      - run:
+          working_directory:  ~/project/frontend-react
+          command: npm run test
 workflows:
   version: 2
   build_and_test:
