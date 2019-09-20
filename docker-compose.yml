@@ -1,0 +1,36 @@
+# docker-compose.yml
+version: "3"
+services:
+  backend:
+    build: ./backend
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    image: dockerbackend:testing
+    volumes:
+      - ./backend:/usr/app/
+      - /usr/app/node_modules
+    working_dir: /usr/app/
+    command: sh -c "npm install && npm run watch-server"
+
+  frontend:
+    build: ./frontend-react
+    depends_on:
+      - postgres
+    ports:
+      - "4000:4000"
+    image: dockerbackend:testing
+    volumes:
+      - ./frontend-react:/usr/app/
+      - /usr/app/node_modules
+    working_dir: /usr/app/
+    command: sh -c "npm install && npm run start"
+
+  postgres:
+    ports:
+      - 5432:5432
+    image: postgres:11.2-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
